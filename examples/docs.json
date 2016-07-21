@@ -1,0 +1,83 @@
+{
+  "src/table.jsx": {
+    "description": "",
+    "displayName": "Table",
+    "methods": [
+      {
+        "name": "renderCells",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "event",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "renderRows",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "renderHeader",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      }
+    ],
+    "props": {
+      "series": {
+        "type": {
+          "name": "instanceOf",
+          "value": "TimeSeries"
+        },
+        "required": true,
+        "description": "A pond.js TimeSeries to display as a Table"
+      },
+      "columns": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "Specify which columns to render. This is an array of object,\nwhere each object is a column. The object contains the `key`,\nwhich is the column name, the `label` which is how the column\nheader will actually display the column name, and a `format`,\nwhich is a d3.format.\n```\nconst columns = [\n   {key: \"time\", label: \"Month\"},\n   {key: \"uptime\", label: \"Availability\"},\n   {key: \"outages\", label: \"Outages\", format: paddedCounterFormat}\n];\n```"
+      },
+      "renderCell": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "A function which returns the contents of the cell. The function\nis called with three arguments:\n * The `event` being rendered\n * The `column` being rendered\n * The `series` being rendered\n\nFor example here is a function that will render a mini-bar within\neach cell:\n\n```\nfunction renderPercentAsBar(event, column) {\n    if (column === \"uptime\") {\n        const value = parseFloat(event.data().get(column));\n        const v = `${value}%`;\n        const barStyle = {\n            background: \"steelblue\",\n            color: \"white\",\n            paddingLeft: 2,\n            width: v\n        };\n        return (\n            <div width=\"100%\" style={{background: \"#E4E4E4\"}}>\n                <div style={barStyle}>{v}</div>\n            </div>\n        );\n    }\n}\n```"
+      },
+      "timeFormat": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "A d3 time format string. e.g. \"MMMM, YYYY\""
+      },
+      "width": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Width of the table",
+        "defaultValue": {
+          "value": "300",
+          "computed": false
+        }
+      },
+      "summary": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "An object describing a summary line at the bottom of the table.\nThe object's keys are the column names, and the values are\nwhat will be rendered in the cell. For example:\n\nconst availabilityDataSummary = {\n    time: \"Past year\",\n    uptime: `${percentFormat(availability.avg(\"uptime\") / 100)}`,\n    outages: `${paddedCounterFormat(availability.sum(\"outages\"))}`\n};"
+      }
+    }
+  }
+}

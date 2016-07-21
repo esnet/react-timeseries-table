@@ -1,0 +1,22 @@
+{
+    "simple": {
+        "title": "Basic",
+        "description": "Simple example showing basic Table use.",
+        "tags": ["table", "index"]
+    },
+    "bars": {
+        "title": "Mini-bars",
+        "description": "Example rendering a mini-barchart within a Table cell.",
+        "tags": ["table", "cellrender", "index"]
+    },
+    "colors": {
+        "title": "Color coding",
+        "description": "Example of color coding text in a Table cell.",
+        "tags": ["table", "cellrender", "index"]
+    },
+    "timestamps": {
+        "title": "Timestamped data",
+        "description": "Example using the table with timestamped events.",
+        "tags": ["table", "timestamp"]
+    }
+}
