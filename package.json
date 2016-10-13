@@ -36,8 +36,8 @@
     "underscore": "^1.7.0"
   },
   "peerDependencies": {
-    "react": "^0.14.3",
-    "pondjs": "^0.6.0"
+    "react": "^15.3.2",
+    "pondjs": "^0.7.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
@@ -58,13 +58,13 @@
     "json-loader": "^0.5.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "pondjs": "git+ssh://git@github.com/esnet/pond.git#v0.7",
+    "pondjs": "^0.7.0",
     "raw-loader": "^0.5.1",
-    "react": "^0.14.3",
+    "react": "^15.3.2",
     "react-docgen": "^2.4.0",
-    "react-dom": "^0.14.3",
+    "react-dom": "^15.3.2",
     "react-markdown": "^1.0.5",
-    "react-router": "^1.0.0",
+    "react-router": "^2.6.0",
     "scroll-behavior": "^0.3.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",

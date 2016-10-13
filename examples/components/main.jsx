@@ -12,7 +12,7 @@
 
 import React from "react";
 import { render } from "react-dom";
-import { Router, Route, IndexRoute } from "react-router";
+import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
 //
 // Docs pages
@@ -23,16 +23,8 @@ import Intro from "./docs/intro";
 import DocPage from "./docs/docpage";
 import ExamplePage from "./examples/example";
 
-//
-// React router setup
-//
-
-import createHistory from "history/lib/createHashHistory";
-import useScroll from "scroll-behavior/lib/useStandardScroll";
-const history = useScroll(createHistory)();
-
 render((
-    <Router history={history}>
+    <Router history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={Intro}/>
             <Route path="docs/:component" component={DocPage} />
