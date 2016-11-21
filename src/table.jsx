@@ -48,6 +48,16 @@ export default React.createClass({
         columns: React.PropTypes.array,
 
         /**
+         * Sort by a column in the TimeSeries. Default is to sort by the timestamp.
+         */
+        sortBy: React.PropTypes.string,
+
+        /**
+         * Reverses the sort direction
+         */
+        reverse: React.PropTypes.bool,
+
+        /**
          * A function which returns the contents of the cell. The function
          * is called with three arguments:
          *  * The `event` being rendered
@@ -196,8 +206,32 @@ export default React.createClass({
 
     renderRows() {
         const rows = [];
-        let i = 0;
+
+        const events = [];
         for (const event of this.props.series.events()) {
+            events.push(event);
+        }
+
+        const { sortBy, reverse } = this.props;
+
+        if (sortBy) {
+            events.sort((a, b) => {
+                const aa = reverse ? a : b;
+                const bb = reverse ? b : a;
+                if (aa.get(sortBy) < bb.get(sortBy)) {
+                    return -1;
+                }
+                if (aa.get(sortBy) > bb.get(sortBy)) {
+                    return 1;
+                }
+                return 0;
+            });
+        } else if (reverse === false) {
+            events.reverse();
+        }
+
+        let i = 0;
+        for (const event of events) {
             rows.push(
                 <tr key={i}>{this.renderCells(event)}</tr>
             );

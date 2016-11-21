@@ -46,6 +46,20 @@
         "required": false,
         "description": "Specify which columns to render. This is an array of object,\nwhere each object is a column. The object contains the `key`,\nwhich is the column name, the `label` which is how the column\nheader will actually display the column name, and a `format`,\nwhich is a d3.format.\n```\nconst columns = [\n   {key: \"time\", label: \"Month\"},\n   {key: \"uptime\", label: \"Availability\"},\n   {key: \"outages\", label: \"Outages\", format: paddedCounterFormat}\n];\n```"
       },
+      "sortBy": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Sort by a column in the TimeSeries. Default is to sort by the timestamp."
+      },
+      "reverse": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Reverses the sort direction"
+      },
       "renderCell": {
         "type": {
           "name": "func"

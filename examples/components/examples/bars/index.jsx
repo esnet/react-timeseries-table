@@ -63,6 +63,13 @@ function renderPercentAsBar(event, column) {
 
 export default React.createClass({
 
+    getInitialState() {
+        return {
+            sortBy: null,
+            reverse: false
+        }
+    },
+
     setDefaultProps() {
         return {
             indexFormat: null
@@ -86,16 +93,54 @@ export default React.createClass({
             overflow: "auto"
         };
 
+        const linkStyle = {
+            color: "#7395b1",
+            cursor: "pointer",
+            fontWeight: 100,
+            margin: 2
+        };
+
+        const linkStyleActive = {
+            color: "steelblue",
+            fontWeight: 800,
+            cursor: "pointer",
+            margin: 2
+        };
+
+        const { sortBy, reverse } = this.state;
+
         return (
-            <div className="row">
-                <div className="col-md-8">
-                    <div style={roundedCornerStyle}>
-                        <Table
-                            series={availability}
-                            timeFormat="MMMM, YYYY"
-                            columns={columns}
-                            summary={availabilityDataSummary}
-                            renderCell={renderPercentAsBar} />
+            <div>
+                <div className="row" style={{paddingBottom: 10}}>
+                    <div className="col-md-8">
+                        <span style={{fontWeight: 800}}>Sort by: </span>
+                        <span style={sortBy === null ? linkStyleActive : linkStyle} onClick={() =>
+                            this.setState({sortBy: null})}>Date</span><span>|</span>
+                        <span style={sortBy === "uptime" ? linkStyleActive : linkStyle} onClick={() =>
+                            this.setState({sortBy: "uptime"})}>Availability</span><span>|</span>
+                        <span style={sortBy === "outages" ? linkStyleActive : linkStyle} onClick={() =>
+                            this.setState({sortBy: "outages"})}>Outages</span>
+                        <span style={{padding: 10}} />
+
+                        <span style={{fontWeight: 800}}>Direction: </span>
+                        <span style={reverse === true ? linkStyleActive : linkStyle} onClick={() =>
+                            this.setState({reverse: true})}>Asc</span><span>|</span>
+                        <span style={reverse === false ? linkStyleActive : linkStyle} onClick={() =>
+                            this.setState({reverse: false})}>Desc</span>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-8">
+                        <div style={roundedCornerStyle}>
+                            <Table
+                                series={availability}
+                                sortBy={this.state.sortBy}
+                                reverse={this.state.reverse}
+                                timeFormat="MMMM, YYYY"
+                                columns={columns}
+                                summary={availabilityDataSummary}
+                                renderCell={renderPercentAsBar} />
+                        </div>
                     </div>
                 </div>
             </div>
